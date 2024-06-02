@@ -1,5 +1,5 @@
 import React from 'react';
-import './Card.css'; // Create and import a CSS file for card styling
+import './Card.css'; // Import the CSS file for card styling
 
 const suitIcons = {
   H: '♥', // Hearts
@@ -15,13 +15,13 @@ const suitColors = {
   S: 'black',
 };
 
-const Card = ({ value, suit }) => {
+const Card = ({ value, suit, hidden }) => {
   const suitIcon = suitIcons[suit];
   const color = suitColors[suit];
 
   return (
-    <span className={`card ${color}`}>
-      {value} {suitIcon}
+    <span className={`card ${hidden ? 'black' : color}`}>
+      {hidden ? "Hidden" : `${value} ${suitIcon}`}
     </span>
   );
 };

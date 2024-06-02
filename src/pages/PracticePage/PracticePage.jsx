@@ -182,38 +182,6 @@ const Practice = () => {
     setTimeout(() => handleDealerTurn(), 1000);
   };
 
-  // const canSplit =
-  //   playerHand.length === 2 && playerHand[0].value === playerHand[1].value;
-
-  // const handleSplit = () => {
-  //   console.log("Splitting hand...");
-  //   // Split the hand into two separate hands
-  //   const newHand1 = [playerHand[0]];
-  //   const newHand2 = [playerHand[1]];
-
-  //   // Draw a card for each new hand
-  //   drawCard("playerHand");
-  //   drawCard("playerHand");
-
-  //   // Calculate the value of each new hand
-  //   const value1 = calculateHandValue(newHand1);
-  //   const value2 = calculateHandValue(newHand2);
-
-  //   // Update the state with the new hands and values
-  //   useStore.setState({
-  //     playerHand: newHand1,
-  //     playerHandValue: value1,
-  //   });
-
-  //   // Delay the next step to ensure state updates
-  //   setTimeout(() => {
-  //     useStore.setState({
-  //       playerHand: newHand2,
-  //       playerHandValue: value2,
-  //     });
-  //   }, 1000);
-  // };
-
   const reset = () => {
     initializeGame();
   };
@@ -244,7 +212,6 @@ const Practice = () => {
 
   return (
     <div className="practice-page">
-
       <div className="practice-container">
         <div className="sidebar-left">
           <div className="info-container">
@@ -264,16 +231,21 @@ const Practice = () => {
           </div>
         </div>
         <div className="game-board">
-      <div className="question-icon" onClick={handleOpenModal}>
-        <FontAwesomeIcon icon={faQuestion} />
-      </div>
+          <div className="question-icon" onClick={handleOpenModal}>
+            <FontAwesomeIcon icon={faQuestion} />
+          </div>
           <h2>Practice Card Counting</h2>
 
           <div className="dealer-container">
             <h3>Dealer's Hand</h3>
             <div className="hand">
               {dealerHand.map((card, index) => (
-                <Card key={index} value={card.value} suit={card.suit} />
+                <Card
+                  key={index}
+                  value={card.value}
+                  suit={card.suit}
+                  hidden={index === 1 && dealerSecondCardHidden}
+                />
               ))}
             </div>
             <p>
@@ -294,12 +266,20 @@ const Practice = () => {
             </div>
             <p>Hand Value: {playerHandValue}</p>
             <div className="player-actions">
-              <button onClick={handlePlayerDraw} disabled={!canHit}>
-                Hit
-              </button>
-              <button onClick={handleStand} disabled={!canStand}>
-                Stand
-              </button>
+              {canNextRound ? (
+                <button onClick={handleNextRound} disabled={!canNextRound}>
+                  Next Hand
+                </button>
+              ) : (
+                <>
+                  <button onClick={handlePlayerDraw} disabled={!canHit}>
+                    Hit
+                  </button>
+                  <button onClick={handleStand} disabled={!canStand}>
+                    Stand
+                  </button>
+                </>
+              )}
               {/* <button onClick={handleSplit} disabled={!canSplit}>
                 Split
               </button> */}
@@ -311,9 +291,7 @@ const Practice = () => {
           <div className="played-cards-container">
             <div className="cards">
               {playedCards.map((card, index) => (
-                <span key={index} className="card">
-                  {card.value} of {card.suit}
-                </span>
+                <Card key={index} value={card.value} suit={card.suit} />
               ))}
             </div>
           </div>
@@ -326,9 +304,9 @@ const Practice = () => {
         <button onClick={reset} disabled={!canResetGame}>
           Reset Game
         </button>
-        <button onClick={handleNextRound} disabled={!canNextRound}>
+        {/* <button onClick={handleNextRound} disabled={!canNextRound}>
           Next Hand
-        </button>
+        </button> */}
       </div>
       {modalOpen && (
         <Modal>

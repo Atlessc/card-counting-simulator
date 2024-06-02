@@ -40,6 +40,10 @@ body {
   text-align: center;
 }
 
+.sidebar-left p {
+  text-align: left;
+}
+
 .game-status {
   text-align: center;
   margin: 20px 0;
