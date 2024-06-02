@@ -1,0 +1,160 @@
+/* Practice.css */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #242424;
+  color: #ecf0f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.practice-page {
+  display: flex;
+  flex-direction: column;
+  background-color: #242424;
+  padding: 2rem 1rem;
+  width: 100%;
+  max-width: 1200px;
+  z-index: 1;
+}
+
+.practice-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar-left, .sidebar-right {
+  width: 25%;
+  padding: 0 10px;
+  margin: 0 10px;
+}
+
+.sidebar-right h3 {
+  text-align: center;
+}
+
+.game-status {
+  text-align: center;
+  margin: 20px 0;
+  color: rgb(0, 0, 0);
+  background-color: rgb(0, 247, 255);
+  font-weight: bold;
+  border: 2px solid rgb(0, 0, 0);
+  padding: 10px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.game-board {
+  width: 75%;
+  background-color: #242424;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.question-icon {
+  background-color: #ffffff;
+  cursor: pointer;
+  color: black;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  float: right;
+  font-size: 1rem;
+  font-weight: bold;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.game-board h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+.player-container, .dealer-container {
+  text-align: center;
+}
+
+.player-actions {
+  margin-top: 10px;
+}
+
+button {
+  background-color: #e74c3c;
+  border: none;
+  border-radius: 4px;
+  color: #ecf0f1;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+.hand-container, .info-container, .played-cards-container {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.hand-container h3, .info-container h3, .played-cards-container h3 {
+  margin-bottom: 10px;
+}
+
+.card {
+  display: inline-block;
+  background-color: #ecf0f1;
+  /* color: #2c3e50; */
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin: 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.info-container p, .played-cards-container .cards {
+  margin: 5px 0;
+}
+
+.played-cards-container .cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+p {
+  font-size: 18px;
+}
+
+button, .card {
+  transition: all 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #c0392b;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+.control-buttons {
+  text-align: center;
+  margin: 20px 0;
+}

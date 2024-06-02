@@ -1,0 +1,15 @@
+.card {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1.2em;
+}
+
+.card.red {
+  color: red;
+}
+
+.card.black {
+  color: black;
+}
