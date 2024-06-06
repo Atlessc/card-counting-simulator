@@ -19,7 +19,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: clamp(320px, 100vw, 2000px);
+  width: clamp(320px, 100vw, 100vw);
   min-height: 100vh;
 }
 
