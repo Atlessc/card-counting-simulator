@@ -6,7 +6,7 @@ const cardValues = {
   10: -1, J: -1, Q: -1, K: -1, A: -1,
 };
 
-const initializeDeck = (decks = 6) => {
+const initializeDeck = (decks = 1) => {
   const suits = ['H', 'D', 'C', 'S'];
   const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
   let deck = [];
@@ -24,6 +24,7 @@ const shuffleDeck = (deck) => {
   for (let i = deck.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [deck[i], deck[j]] = [deck[j], deck[i]];
+    console.log(deck)
   }
   return deck;
 };
