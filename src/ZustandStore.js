@@ -15,21 +15,17 @@ const initializeDeck = (decks = 1) => {
       for (let value of values) {
         deck.push({ suit, value });
       }
-    console.log(deck);
     }
   }
+    console.log(deck);
   return deck;
 };
 
 const shuffleDeck = (deck) => {
-    // console.log(deck);
+    console.log(deck);
   for (let i = deck.length - 1; i > 0; i--) {
-    // console.log(deck);
-    // console.log(i);
     const j = Math.floor(Math.random() * (i + 1));
-    // console.log(j);
     [deck[i], deck[j]] = [deck[j], deck[i]];
-    // console.log(deck);
   }
     console.log(deck);
   return deck;
