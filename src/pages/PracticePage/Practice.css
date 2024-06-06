@@ -59,6 +59,7 @@ body {
 }
 
 .game-board {
+  position: relative;
   width: 75%;
   background-color: #242424;
   padding: 20px;
@@ -67,6 +68,8 @@ body {
 }
 
 .question-icon {
+  position: absolute;
+  right: 10px;
   background-color: #ffffff;
   cursor: pointer;
   color: black;
