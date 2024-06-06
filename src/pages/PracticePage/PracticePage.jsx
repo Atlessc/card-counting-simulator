@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useStore from "../../ZustandStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons";
@@ -42,12 +42,15 @@ const determineWinner = (playerHand, dealerHand) => {
     return "Player wins!";
   } else if (dealerValue > playerValue) {
     return "Dealer wins!";
-  } else {
+  } else if (playerValue === dealerValue && (playerValue || dealerValue) < 21) {
     return "It's a tie!";
+  } else if (playerValue === 21) {
+    return "Player has blackjack! Player Wins!";
   }
 };
 
 const Practice = () => {
+  const [adviceMessage, setAdviceMessage] = useState("");
   const {
     playerHand,
     dealerHand,
@@ -140,7 +143,7 @@ const Practice = () => {
 
           // Recursively handle the dealer's turn until they stand
           handleDealerTurn();
-        }, 1000); // Set a timeout for the next draw
+        }, 500); // Set a timeout for the next draw
         break;
 
       case updatedDealerHandValue >= 18:
@@ -204,11 +207,30 @@ const Practice = () => {
     }
   };
 
+  useEffect(() => {
+    if (runningCount > 0) {
+      setAdviceMessage("Higher cards more common");
+    } else if (runningCount < 0) {
+      setAdviceMessage("Lower cards more common");
+    } else {
+      setAdviceMessage("Could go either way");
+    }
+  }, [runningCount]);
+
   const canHit = playerTurn && !playerBust && !playerBlackjack;
   const canStand = playerTurn && !playerBust && !playerBlackjack;
   const canNextRound = gameOver && !playerTurn;
   const canStartGame = !playerTurn && !gameOver && playerHand.length === 0;
   const canResetGame = true;
+
+  useEffect(() => {
+    if (!canStartGame) {
+      if (playerHandValue === 21) {
+        setPlayerTurn(false);
+        setTimeout(() => handleDealerTurn(), 2000);
+      }
+    }
+  }, [playerHandValue]);
 
   return (
     <div className="practice-page">
@@ -220,6 +242,20 @@ const Practice = () => {
             <p>True Count: {trueCount.toFixed(2)}</p>
             <p>Cards Remaining: {cardsRemaining}</p>
             <br />
+            <br />
+            <p
+              className="AdviceMessage"
+              style={{
+                backgroundColor:
+                  runningCount > 0
+                    ? "green"
+                    : runningCount < 0
+                    ? "red"
+                    : "gray",
+              }}
+            >
+              {adviceMessage}
+            </p>
             <br />
             <br />
             <div className={playerBust || gameOver ? "game-status" : ""}>
@@ -267,9 +303,16 @@ const Practice = () => {
             <p>Hand Value: {playerHandValue}</p>
             <div className="player-actions">
               {canNextRound ? (
-                <button onClick={handleNextRound} disabled={!canNextRound}>
-                  Next Hand
-                </button>
+                cardsRemaining <= 6 ? (            
+                  <button onClick={reset} disabled={!canResetGame}>
+                    Reset Game
+                  </button>
+                ) : (
+                  <button onClick={handleNextRound} disabled={!canNextRound || cardsRemaining <= 6}>
+                    Next Hand
+                  </button>
+                  )
+                
               ) : (
                 <>
                   <button onClick={handlePlayerDraw} disabled={!canHit}>
@@ -285,6 +328,20 @@ const Practice = () => {
               </button> */}
             </div>
           </div>
+          <br />
+          <br />
+          <br />
+          <div className="control-buttons">
+            <button onClick={startGame} disabled={!canStartGame}>
+              Start Game
+            </button>
+            <button onClick={reset} disabled={!canResetGame}>
+              Reset Game
+            </button>
+            {/* <button onClick={handleNextRound} disabled={!canNextRound}>
+          Next Hand
+        </button> */}
+          </div>
         </div>
         {/* <div className="sidebar-right">
             <h3>Played Cards</h3>
@@ -297,17 +354,7 @@ const Practice = () => {
           </div>
         </div> */}
       </div>
-      <div className="control-buttons">
-        <button onClick={startGame} disabled={!canStartGame}>
-          Start Game
-        </button>
-        <button onClick={reset} disabled={!canResetGame}>
-          Reset Game
-        </button>
-        {/* <button onClick={handleNextRound} disabled={!canNextRound}>
-          Next Hand
-        </button> */}
-      </div>
+
       {modalOpen && (
         <Modal>
           <LearningPage />
