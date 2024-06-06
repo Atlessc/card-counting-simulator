@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Practice from "./pages/PracticePage/PracticePage.jsx";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Practice />} />
       </Routes>
       <Footer />
+      <Analytics />
     </div>
   );
 }
