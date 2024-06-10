@@ -6,7 +6,7 @@ const cardValues = {
   10: -1, J: -1, Q: -1, K: -1, A: -1,
 };
 
-const initializeDeck = (decks = 1) => {
+const initializeDeck = (decks = 6) => {
   const suits = ['H', 'D', 'C', 'S'];
   const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
   let deck = [];
