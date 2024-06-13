@@ -1,4 +1,6 @@
 import {create} from 'zustand';
+import CookieConsentStatus from './enums/CookieConsentEnums';
+import Cookies from 'js-cookie';
 
 const cardValues = {
   2: 1, 3: 1, 4: 1, 5: 1,
@@ -70,6 +72,14 @@ const useStore = create((set, get) => ({
   playerBlackjack: false,
   dealerSecondCardHidden: true,
   modalOpen: false,
+  cookieConsentVisible: true,
+  cookieConsent: Cookies.get('userConsent') || CookieConsentStatus.UNANSWERED,
+
+  setCookieConsentVisible: (value) => set({ cookieConsentVisible: value }),
+  setCookieConsent: (consent) => {
+    Cookies.set('userConsent', consent, { expires: 365 });
+    set({ cookieConsent: consent });
+  },
 
   setModalOpen: (value) => set({ modalOpen: value }),
 
