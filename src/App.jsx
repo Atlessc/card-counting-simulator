@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
 // import useStore from './ZustandStore.js';
 import Practice from "./pages/PracticePage/PracticePage.jsx";
@@ -14,6 +14,18 @@ function App() {
 
   const { cookieConsent, cookieConsentVisible } = useStore();
 
+  const dontShowCookieNotice = () => {
+    setTimeout(() => {
+      useStore.setState({ cookieConsentVisible: false });
+    }, 10000);
+  }
+
+  useEffect(() => {
+    if (cookieConsent === CookieConsentStatus.ACCEPTED) {
+      dontShowCookieNotice();
+    }
+  }, [cookieConsent]);
+
   return (
     <div>
       <NavBar />
@@ -21,9 +33,9 @@ function App() {
         <Route path="/" element={<Practice />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
       {cookieConsent === CookieConsentStatus.ACCEPTED && <Analytics />}
-      {(!(cookieConsent === CookieConsentStatus.ACCEPTED) && cookieConsentVisible) && <CookieNotice />}
+      {cookieConsentVisible && <CookieNotice />}
     </div>
   );
 }

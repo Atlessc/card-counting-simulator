@@ -9,8 +9,8 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 const NoticeWrapper = styled.div`
   position: relative;
   width: 100%;
-  background-color: #f1f1f1;
-  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,7 +24,7 @@ const NoticeWrapper = styled.div`
 `;
 
 const NoticeText = styled.p`
-  color: #333;
+  color: #242424;
   font-size: 1rem;
   margin: 0;
   flex: 1;
@@ -44,7 +44,7 @@ const Button = styled.button`
   cursor: pointer;
   font-size: 1rem;
   &:hover {
-    background-color: #005bb5;
+    background-color: #005bb5 !important;
   }
 `;
 
@@ -52,7 +52,7 @@ const DeclineButton = styled(Button)`
   background-color: #e0e0e0;
   color: #333;
   &:hover {
-    background-color: #c0c0c0;
+    background-color: #c0c0c0 !important;
   }
 `;
 
@@ -77,7 +77,7 @@ const UpdateConsentWrapper = styled.div`
 const UpdateButton = styled(Button)`
   background-color: #ff9500;
   &:hover {
-    background-color: #cc7a00;
+    background-color: #cc7a00 !important;
   }
 `;
 
