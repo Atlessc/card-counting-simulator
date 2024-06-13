@@ -17,7 +17,7 @@ function App() {
   const dontShowCookieNotice = () => {
     setTimeout(() => {
       useStore.setState({ cookieConsentVisible: false });
-    }, 10000);
+    }, 5000);
   }
 
   useEffect(() => {
